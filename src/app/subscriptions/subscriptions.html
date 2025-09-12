@@ -1,1 +1,54 @@
-<p>subscriptions works!</p>
+<div class="subscription-container">
+  <div class="subscription-content">
+    <h1>Suscripción Premium</h1>
+    <div class="plans">
+      <div class="plan">
+        <h3>Plan Mensual</h3>
+        <p class="price">$9.99/mes</p>
+        <ul>
+          <li>Acceso ilimitado a todas las cápsulas</li>
+          <li>Contenido exclusivo</li>
+          <li>Sin anuncios</li>
+        </ul>
+        <button type="button" class="select-plan-btn">Seleccionar Plan</button>
+      </div>
+      <div class="plan featured">
+        <h3>Plan Anual</h3>
+        <p class="price">$99.99/año</p>
+        <p class="savings">¡Ahorra 17%!</p>
+        <ul>
+          <li>Acceso ilimitado a todas las cápsulas</li>
+          <li>Contenido exclusivo</li>
+          <li>Sin anuncios</li>
+          <li>Certificados de finalización</li>
+        </ul>
+        <button type="button" class="select-plan-btn">Seleccionar Plan</button>
+      </div>
+    </div>
+    
+    <div class="payment-form">
+      <h3>Información de Pago</h3>
+      <form>
+        <div class="form-group">
+          <label for="cardNumber">Número de Tarjeta</label>
+          <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="expiryDate">Fecha de Vencimiento</label>
+            <input type="text" id="expiryDate" placeholder="MM/AA">
+          </div>
+          <div class="form-group">
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" placeholder="123">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cardholderName">Nombre del Titular</label>
+          <input type="text" id="cardholderName" placeholder="Nombre completo">
+        </div>
+        <button type="button" class="subscribe-btn">Suscribirse Ahora</button>
+      </form>
+    </div>
+  </div>
+</div>

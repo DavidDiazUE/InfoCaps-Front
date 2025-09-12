@@ -1,0 +1,218 @@
+.course-list-container {
+  min-height: calc(100vh - 200px);
+  padding: 2rem;
+}
+
+.course-header {
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.category-info {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.category-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.category-icon.humanidades {
+  background-color: #dc2626;
+}
+
+.category-icon.historia {
+  background-color: #16a34a;
+}
+
+.category-icon.tecnologia {
+  background-color: #2563eb;
+}
+
+.category-icon.ciencias {
+  background-color: #ca8a04;
+}
+
+
+.category-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.category-title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #1f2937;
+  margin: 0;
+}
+
+.courses-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 2rem;
+}
+
+.course-card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+}
+
+
+.course-card.full-course {
+  min-height: 600px;
+}
+
+.course-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+}
+
+
+.course-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.course-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.course-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+ 
+  padding: 2rem;
+}
+
+
+.course-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 1rem;
+}
+
+
+.course-modules {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.module {
+  background: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  border-left: 4px solid #3b82f6;
+}
+
+.module h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 1rem 0;
+}
+
+.module ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.module li {
+  padding: 0.5rem 0;
+  color: #4b5563;
+  border-bottom: 1px solid #e5e7eb;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.module li:last-child {
+  border-bottom: none;
+}
+
+.module li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #10b981;
+  font-weight: bold;
+}
+
+.explore-btn {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  align-self: flex-start;
+}
+
+.explore-btn:hover {
+  background-color: #2563eb;
+}
+
+@media (max-width: 768px) {
+  .course-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .category-info {
+    flex-direction: column;
+  }
+
+  .category-title {
+    font-size: 2rem;
+  }
+
+  .courses-grid {
+    grid-template-columns: 1fr;
+  }
+
+ 
+  .course-card.full-course {
+    min-height: auto;
+  }
+
+  .module {
+    padding: 1rem;
+  }
+}
