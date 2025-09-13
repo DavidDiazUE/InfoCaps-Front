@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AccessibilityToolbar } from './accessibility-toolbar/accessibility-toolbar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, AccessibilityToolbar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
