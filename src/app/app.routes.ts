@@ -6,7 +6,6 @@ import { CourseListComponent } from './courses/course-list/course-list';
 import { CourseDetailComponent } from './courses/course-detail/course-detail';
 import { SubscriptionFormComponent } from './subscriptions/subscription-form/subscription-form';
 import { AuthGuard } from './core/guards/guards/auth-guard';
-import { SubscriptionGuard } from './core/guards/guards/subscription-guard';
 import { AccountingCourseComponent } from './courses/accounting-course/accounting-course';
 
 export const routes: Routes = [

@@ -9,7 +9,7 @@ import { Accecibility } from '../services/accecibility';
   styleUrl: './accessibility-toolbar.css'
 })
 export class AccessibilityToolbar {
-  constructor(private accesibilityService: Accecibility) {}
+  constructor(private accesibilityService : Accecibility){}
 
   aumentar() {
     this.accesibilityService.aumentarFuente();

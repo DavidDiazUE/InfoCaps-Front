@@ -1,20 +1,28 @@
 .accessibility-controls {
   position: fixed;
-  top: 10px;
-  right: 10px;
+  top: 50%; 
+  right: 10px; 
+  transform: translateY(-50%); 
   z-index: 1000;
   display: flex;
-  gap: 5px;
+  flex-direction: column; 
+  gap: 8px; 
+  align-items: center;
 }
 
 .accessibility-controls button {
   background: #007bff;
   color: white;
   border: none;
-  padding: 8px 12px;
+  padding: 6px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 12px;
+  width: 60px;  
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: background-color 0.3s ease;
 }
 
@@ -22,7 +30,9 @@
   background: #0056b3;
 }
 
-.accessibility-controls button:focus {
-  outline: 2px solid #fff;
-  outline-offset: 2px;
+
+.accessibility-controls button img {
+  width: 20px; /* tamaño imagen pequeña */
+  height: 20px;
+  display: block;
 }

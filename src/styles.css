@@ -2,31 +2,71 @@
 html{
     font-family: sans-serif;
 }
-.accessibility-controls {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  z-index: 1000;
-  display: flex;
-  gap: 5px;
+
+body {
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.accessibility-controls button {
-  background: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 12px;
-  transition: background-color 0.3s ease;
+/* Modo Contraste */
+body.modo-contraste {
+  background-color: #000;
+  color: #fff;
 }
 
-.accessibility-controls button:hover {
-  background: #0056b3;
+body.modo-contraste a {
+  color: #ffff00; /* Amarillo brillante para enlaces */
+  text-decoration: underline; /* Más visible */
 }
 
-.accessibility-controls button:focus {
-  outline: 2px solid #fff;
+body.modo-contraste a:hover,
+body.modo-contraste a:focus {
+  color: #ffea00;
+  outline: 2px solid #ffff00; /* Para mejor enfoque */
+  outline-offset: 2px;
+}
+
+body.modo-contraste button,
+body.modo-contraste input,
+body.modo-contraste select,
+body.modo-contraste textarea {
+  background-color: #333;
+  color: #fff;
+  border: 2px solid #fff;
+  box-shadow: none;
+}
+
+body.modo-contraste button:hover,
+body.modo-contraste button:focus,
+body.modo-contraste input:focus,
+body.modo-contraste select:focus,
+body.modo-contraste textarea:focus {
+  background-color: #555;
+  border-color: #ffff00;
+  outline: none;
+  box-shadow: 0 0 5px 2px #ffff00;
+}
+
+body.modo-contraste .header,
+body.modo-contraste .footer,
+body.modo-contraste .navigation {
+  background-color: #000;
+  color: #fff;
+  border-color: #fff;
+}
+
+body.modo-contraste img {
+  filter: brightness(0) invert(1); /* Invertir colores para imágenes si es apropiado */
+}
+
+/* Opcional: mejorar visibilidad de tablas y bordes */
+body.modo-contraste table,
+body.modo-contraste th,
+body.modo-contraste td {
+  border: 1px solid #fff;
+}
+
+/* Cursor visible */
+body.modo-contraste *:focus {
+  outline: 3px solid #ffff00;
   outline-offset: 2px;
 }
