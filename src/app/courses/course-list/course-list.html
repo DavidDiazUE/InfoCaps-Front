@@ -1,0 +1,32 @@
+<div class="course-list-container">
+  <div class="container">
+    <div class="header">
+      <h1>Nuestros Cursos</h1>
+      <p>Descubre todos los cursos disponibles en nuestra plataforma</p>
+    </div>
+
+    <div class="courses-grid">
+      <div class="course-card" *ngFor="let course of filteredCourses">
+        <div class="course-image">
+          <img [src]="course.image" [alt]="course.title">
+          
+        </div>
+        
+        <div class="course-content">
+          <h3>{{ course.title }}</h3>
+          <p>{{ course.description }}</p>
+          
+          <div class="course-meta">
+            <span class="duration">⏱️ {{ course.duration }}</span>
+            <span class="lessons">📚 {{ course.lessons.length }} lecciones</span>
+          </div>
+          
+          <div class="course-footer">
+            <div class="price">${{ course.price }}</div>
+            <a [routerLink]="['/course', course.category]" class="btn btn-primary">
+              Ver Curso
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>

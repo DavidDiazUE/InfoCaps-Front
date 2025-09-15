@@ -1,0 +1,281 @@
+.course-detail-container {
+  min-height: calc(100vh - 140px);
+  padding: 40px 20px;
+  background: #f8f9fa;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.course-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.breadcrumb {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.breadcrumb a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.course-header h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.course-description {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.course-stats {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #555;
+}
+
+.stat .icon {
+  font-size: 1.2rem;
+}
+
+.enrollment-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #28a745;
+}
+
+.course-image img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.course-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+}
+
+.course-syllabus {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.course-syllabus h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.lessons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.lesson-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.lesson-item:hover {
+  background-color: #f8f9fa;
+}
+
+.lesson-number {
+  background: #007bff;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.lesson-info {
+  flex-grow: 1;
+}
+
+.lesson-info h3 {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.lesson-info p {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.lesson-duration {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.lesson-status {
+  font-size: 1.2rem;
+}
+
+.lock-icon {
+  color: #dc3545;
+}
+
+.play-icon {
+  color: #28a745;
+}
+
+.course-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-card {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.info-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.info-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-card li {
+  padding: 8px 0;
+  color: #666;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.info-card li:last-child {
+  border-bottom: none;
+}
+
+.btn {
+  padding: 12px 30px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-primary {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background: #0056b3;
+  border-color: #0056b3;
+}
+
+.btn-large {
+  padding: 15px 40px;
+  font-size: 1.1rem;
+}
+
+.not-found {
+  min-height: calc(100vh - 140px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.not-found h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.not-found p {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+@media (max-width: 768px) {
+  .course-header {
+    grid-template-columns: 1fr;
+  }
+  
+  .course-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .course-header h1 {
+    font-size: 2rem;
+  }
+  
+  .course-stats {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .enrollment-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .btn-large {
+    width: 100%;
+  }
+}

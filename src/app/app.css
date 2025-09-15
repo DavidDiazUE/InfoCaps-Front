@@ -1,0 +1,40 @@
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+}
+
+/* High contrast mode */
+:global(.high-contrast) {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+:global(.high-contrast *) {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+:global(.high-contrast a) {
+  color: #ffff00 !important;
+}
+
+:global(.high-contrast button) {
+  background: #fff !important;
+  color: #000 !important;
+}
+
+:global(.high-contrast .btn-primary) {
+  background: #ffff00 !important;
+  color: #000 !important;
+  border-color: #ffff00 !important;
+}
+
+:global(.high-contrast img) {
+  filter: contrast(200%) brightness(150%);
+}
