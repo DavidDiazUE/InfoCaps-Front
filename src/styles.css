@@ -1,72 +1,205 @@
-/* You can add global styles to this file, and also import other style files */
 html{
-    font-family: sans-serif;
+  font-family: sans-serif;
 }
 
 body {
+  margin: 0;
+  padding: 0;
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Modo Contraste */
-body.modo-contraste {
-  background-color: #000;
-  color: #fff;
+/* ===========================================
+   MODO CONTRASTE - ESTILOS DE ACCESIBILIDAD
+   =========================================== */
+
+/* Selector universal para aplicar a TODOS los elementos */
+body.modo-contraste,
+body.modo-contraste * {
+  background-color: #000 !important;
+  color: #ffff00 !important;
 }
 
+/* Elementos específicos de la aplicación */
+body.modo-contraste .home,
+body.modo-contraste .container,
+body.modo-contraste .hero-section,
+body.modo-contraste .categories-section,
+body.modo-contraste .cta-section,
+body.modo-contraste .login-card,
+body.modo-contraste .signup-card,
+body.modo-contraste .header,
+body.modo-contraste .footer,
+body.modo-contraste .course-list,
+body.modo-contraste .course-detail,
+body.modo-contraste .lesson-detail,
+body.modo-contraste .profile,
+body.modo-contraste .settings,
+body.modo-contraste .auth,
+body.modo-contraste .dashboard,
+body.modo-contraste .admin,
+body.modo-contraste .user-management,
+body.modo-contraste .content,
+body.modo-contraste .reports,
+body.modo-contraste .navigation,
+body.modo-contraste .table,
+body.modo-contraste th,
+body.modo-contraste td {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+}
+
+/* Elementos específicos de cursos */
+body.modo-contraste .course-container,
+body.modo-contraste .course-header,
+body.modo-contraste .course-content,
+body.modo-contraste .course-title-section,
+body.modo-contraste .course-content-section,
+body.modo-contraste .lessons-section,
+body.modo-contraste .lesson-card,
+body.modo-contraste .content-section,
+body.modo-contraste .stat-item,
+body.modo-contraste .topic-item,
+body.modo-contraste .login-required-section {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+}
+
+/* Penetrar en componentes Angular encapsulados */
+::ng-deep body.modo-contraste .course-container,
+::ng-deep body.modo-contraste .course-header,
+::ng-deep body.modo-contraste .course-content,
+::ng-deep body.modo-contraste .lesson-card,
+::ng-deep body.modo-contraste .content-section,
+::ng-deep body.modo-contraste .lessons-section,
+::ng-deep body.modo-contraste .stat-item,
+::ng-deep body.modo-contraste .topic-item {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+}
+
+/* TEXTOS */
+body.modo-contraste h1,
+body.modo-contraste h2,
+body.modo-contraste h3,
+body.modo-contraste h4,
+body.modo-contraste h5,
+body.modo-contraste h6,
+body.modo-contraste p,
+body.modo-contraste span,
+body.modo-contraste label,
+body.modo-contraste div,
+body.modo-contraste li,
+body.modo-contraste td,
+body.modo-contraste th {
+  color: #ffff00 !important;
+  background-color: transparent !important;
+}
+
+/* ENLACES */
 body.modo-contraste a {
-  color: #ffff00; /* Amarillo brillante para enlaces */
-  text-decoration: underline; /* Más visible */
+  color: #ffff00 !important;
+  text-decoration: underline !important;
 }
 
 body.modo-contraste a:hover,
 body.modo-contraste a:focus {
-  color: #ffea00;
-  outline: 2px solid #ffff00; /* Para mejor enfoque */
-  outline-offset: 2px;
+  color: #ffea00 !important;
+  outline: 2px solid #ffff00 !important;
+  outline-offset: 2px !important;
 }
 
-body.modo-contraste button,
+/* FORMULARIOS */
 body.modo-contraste input,
 body.modo-contraste select,
 body.modo-contraste textarea {
-  background-color: #333;
-  color: #fff;
-  border: 2px solid #fff;
-  box-shadow: none;
+  background-color: #222 !important;
+  color: #ffff00 !important;
+  border: 1px solid #ffff00 !important;
 }
 
-body.modo-contraste button:hover,
-body.modo-contraste button:focus,
 body.modo-contraste input:focus,
 body.modo-contraste select:focus,
 body.modo-contraste textarea:focus {
-  background-color: #555;
-  border-color: #ffff00;
-  outline: none;
-  box-shadow: 0 0 5px 2px #ffff00;
+  background-color: #333 !important;
+  border-color: #ffea00 !important;
+  outline: none !important;
+  box-shadow: 0 0 5px 2px #ffff00 !important;
 }
 
-body.modo-contraste .header,
-body.modo-contraste .footer,
-body.modo-contraste .navigation {
-  background-color: #000;
-  color: #fff;
-  border-color: #fff;
+/* BOTONES */
+body.modo-contraste button {
+  background-color: #333 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
 }
 
-body.modo-contraste img {
-  filter: brightness(0) invert(1); /* Invertir colores para imágenes si es apropiado */
+body.modo-contraste button:hover,
+body.modo-contraste button:focus {
+  background-color: #444 !important;
+  color: #ffea00 !important;
+  border-color: #ffea00 !important;
 }
 
-/* Opcional: mejorar visibilidad de tablas y bordes */
+/* TABLAS */
 body.modo-contraste table,
 body.modo-contraste th,
 body.modo-contraste td {
-  border: 1px solid #fff;
+  border: 1px solid #ffff00 !important;
+  background-color: #000 !important;
+  color: #ffff00 !important;
 }
 
-/* Cursor visible */
+/* CURSOR VISIBLE EN FOCO */
 body.modo-contraste *:focus {
-  outline: 3px solid #ffff00;
-  outline-offset: 2px;
+  outline: 3px solid #ffff00 !important;
+  outline-offset: 2px !important;
+}
+
+/* INVERTIR IMÁGENES EN MODO CONTRASTE */
+body.modo-contraste img {
+  filter: brightness(0) invert(1) !important;
+}
+
+/* Estilos adicionales para componentes Angular */
+::ng-deep .modo-contraste .header,
+::ng-deep .modo-contraste .footer,
+::ng-deep .modo-contraste .navigation,
+::ng-deep .modo-contraste .home,
+::ng-deep .modo-contraste .container {
+  background-color: #000 !important;
+  color: #ffff00 !important;
+}
+
+/* Colores de categorías globales con !important */
+.category-contabilidad,
+[class*="category-contabilidad"] {
+  background-color: #e74c3c !important;
+}
+
+.category-finanzas,
+[class*="category-finanzas"] {
+  background-color: #27ae60 !important;
+}
+
+.category-marketing,
+[class*="category-marketing"] {
+  background-color: #3498db !important;
+}
+
+.category-emprendimiento,
+[class*="category-emprendimiento"] {
+  background-color: #f39c12 !important;
+}
+
+/* Override de colores de categorías en modo contraste */
+body.modo-contraste .category-contabilidad,
+body.modo-contraste [class*="category-contabilidad"],
+body.modo-contraste .category-finanzas,
+body.modo-contraste [class*="category-finanzas"],
+body.modo-contraste .category-marketing,
+body.modo-contraste [class*="category-marketing"],
+body.modo-contraste .category-emprendimiento,
+body.modo-contraste [class*="category-emprendimiento"] {
+  background-color: #000 !important;
+  color: #ffff00 !important;
 }

@@ -1,32 +1,94 @@
-<div class="course-list-container">
+<div class="course-container">
   <div class="container">
-    <div class="header">
-      <h1>Nuestros Cursos</h1>
-      <p>Descubre todos los cursos disponibles en nuestra plataforma</p>
+    <!-- Course Header - Siempre visible -->
+    <div class="course-header">
+      <div class="category-icon" [ngClass]="'category-' + category" [style.background-color]="categoryColor">
+        <span>{{ categoryIcon }}</span>
+      </div>
+      <div class="course-title-section">
+        <h1>{{ courseInfo.title }}</h1>
+        <p class="course-description">{{ courseInfo.description }}</p>
+      </div>
     </div>
 
-    <div class="courses-grid">
-      <div class="course-card" *ngFor="let course of filteredCourses">
-        <div class="course-image">
-          <img [src]="course.image" [alt]="course.title">
-          
-        </div>
-        
-        <div class="course-content">
-          <h3>{{ course.title }}</h3>
-          <p>{{ course.description }}</p>
-          
-          <div class="course-meta">
-            <span class="duration">⏱️ {{ course.duration }}</span>
-            <span class="lessons">📚 {{ course.lessons.length }} lecciones</span>
-          </div>
-          
-          <div class="course-footer">
-            <div class="price">${{ course.price }}</div>
-            <a [routerLink]="['/course', course.category]" class="btn btn-primary">
-              Ver Curso
-            </a>
+    <!-- Course Stats - Solo visible si está logueado -->
+    <div class="course-stats" *ngIf="isLoggedIn && !loading">
+      <div class="stat-item">
+        <div class="stat-number">{{ courseInfo.totalLessons }}</div>
+        <div class="stat-label">Lecciones</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">{{ courseInfo.estimatedDuration }}</div>
+        <div class="stat-label">Minutos</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">{{ courseInfo.level }}</div>
+        <div class="stat-label">Nivel</div>
+      </div>
+    </div>
+
+    <!-- Course Content Preview - Siempre visible -->
+    <div class="course-content">
+      <div class="content-section">
+        <h2>¿Qué aprenderás?</h2>
+        <div class="topics-grid">
+          <div class="topic-item" *ngFor="let topic of courseInfo.topics">
+            <span class="topic-icon">✓</span>
+            <span class="topic-text">{{ topic }}</span>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Login Required Message - Solo si NO está logueado -->
+    <div class="login-required-section" *ngIf="!isLoggedIn">
+      <div class="login-message">
+        <h2>¡Inicia sesión para acceder a las lecciones!</h2>
+        <p>Regístrate o inicia sesión para comenzar tu aprendizaje y ver todas las lecciones disponibles</p>
+        <div class="auth-buttons">
+          <a routerLink="/login" class="btn btn-primary">Iniciar Sesión</a>
+          <a routerLink="/signup" class="btn btn-secondary">Registrarse</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lessons List - Solo si está logueado -->
+    <div class="lessons-section" *ngIf="isLoggedIn">
+      <h2>Lecciones del Curso</h2>
+      
+      <div class="loading-message" *ngIf="loading">
+        <div class="loading-spinner"></div>
+        <p>Cargando lecciones...</p>
+      </div>
+      
+      <div class="no-lessons-message" *ngIf="!loading && lessons.length === 0">
+        <div class="empty-state">
+          <span class="empty-icon">📚</span>
+          <h3>No hay lecciones disponibles</h3>
+          <p>Las lecciones para esta categoría estarán disponibles pronto.</p>
+        </div>
+      </div>
+      
+      <div class="lessons-list" *ngIf="!loading && lessons.length > 0">
+        <div class="lesson-card" *ngFor="let lesson of lessons" [attr.data-lesson-id]="lesson.lesson_id">
+          <div class="lesson-content">
+            <div class="lesson-number">{{ lesson.order_number }}</div>
+            <div class="lesson-info">
+              <h3 class="lesson-title">{{ lesson.lesson_title }}</h3>
+              <p class="lesson-description">
+                Aprende sobre {{ lesson.lesson_title.toLowerCase() }} - Duración: {{ lesson.duration_minutes || 5 }} minutos
+              </p>
+              <div class="lesson-meta">
+                <span class="lesson-type">{{ lesson.content_type || 'Texto' }}</span>
+                <span class="lesson-duration">{{ lesson.duration_minutes || 5 }} min</span>
+              </div>
+            </div>
+            <button class="btn-view-lesson" (click)="viewLesson(lesson)">
+              Ver lección
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

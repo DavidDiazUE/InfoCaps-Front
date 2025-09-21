@@ -1,102 +1,181 @@
 .header {
-  background-color: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
-  padding: 1rem 0;
+  background: #fff;
+  border-bottom: 1px solid #eaeaea;
+  padding: 12px 0;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
+  width: 100%;
 }
 
-.header-container {
-  max-width: 1200px;
+.container {
+  max-width: 1300px;
   margin: 0 auto;
+  padding: 0 24px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0 2rem;
+  justify-content: space-between;
 }
 
-.logo h1 {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #1f2937;
-  margin: 0;
+.logo img {
+  height: 80px;
+  max-width: 100%;
+  display: block;
 }
 
-.logo-image {
-  height: 100px;
-  width: auto;
-  object-fit: contain;
-}
-
-.navigation {
-   flex: 1;
-  margin-left: 0; 
+/* 🔹 NAV principal */
+.nav {
   display: flex;
-  justify-content: center; 
 }
 
-.nav-links {
+.nav ul {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 2rem;
+  gap: 32px;
 }
 
-.nav-link {
+.nav a {
   text-decoration: none;
-  color: #374151;
-  font-weight: 300;
-  transition: color 0.2s;
-}
-
-.nav-link:hover {
-  color: #3b82f6;
-}
-.nav-links li:first-child .nav-link {
-  border-bottom: 3px solid #3b82f6; 
-  padding-bottom: 0.25rem; 
-  color: #000;
-  font-weight: 600;
-  transition: color 0.2s;
-  font-size: 1rem;
-}
-
-.nav-links li:first-child .nav-link:hover {
-  color: #000; 
-  border-bottom-color: #2563eb; 
-  background: none; 
-}
-
-
-.login-btn {
-  background-color: #3b82f6;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  text-decoration: none;
+  color: #2c3e50;
   font-weight: 500;
-  transition: background-color 0.2s;
+  font-size: 16px;
+  transition: color 0.3s ease;
+  position: relative;
 }
 
-.login-btn:hover {
-  background-color: #2563eb;
+.nav a:hover,
+.nav a.active {
+  color: #4a90e2;
 }
 
+.nav a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #4a90e2;
+  border-radius: 2px;
+}
+
+/* 🔹 Botones */
+.btn {
+  padding: 10px 22px;
+  border-radius: 25px;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: #4a90e2;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #357abd;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.welcome-text {
+  color: #2c3e50;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* 📱 Responsive: Tablets */
+@media (max-width: 992px) {
+  .nav ul {
+    gap: 20px;
+  }
+}
+
+/* 📱 Responsive: Menú hamburguesa para móviles */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  height: 3px;
+  background: #2c3e50;
+  border-radius: 3px;
+  width: 100%;
+}
+
+/* Ocultar menú en móviles por defecto */
 @media (max-width: 768px) {
-  .header-container {
-    flex-direction: column;
-    gap: 1rem;
+  .container {
+    flex-wrap: wrap;
   }
 
-  .navigation {
-    margin-left: 0;
+  .menu-toggle {
+    display: flex;
   }
 
-  .nav-links {
+  .nav {
+    display: none;
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .nav ul {
     flex-direction: column;
-    text-align: center;
-    gap: 1rem;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .nav.active {
+    display: flex;
+  }
+
+  .auth-section {
+    margin-top: 12px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+
+@media (max-width: 400px) {
+  .logo img {
+    height: 35px;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .welcome-text {
+    font-size: 12px;
+  }
+
+  .nav ul {
+    gap: 12px;
   }
 }

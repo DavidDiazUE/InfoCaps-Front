@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { CourseDetailComponent } from '../course-detail/course-detail';
+import { CourseListComponent } from '../course-list/course-list';
 
 @Component({
   selector: 'app-finance-course',
   standalone: true,
-  imports: [CourseDetailComponent],
-  template: '<app-course-detail></app-course-detail>'
+  imports: [CourseListComponent],
+  template: '<app-course-list category="finanzas" categoryIcon="💰" categoryColor="#27ae60"></app-course-list>'
 })
 export class FinanceCourseComponent {}

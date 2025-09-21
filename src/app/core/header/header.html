@@ -1,32 +1,26 @@
 <header class="header">
-  <div class="header-container">
-    <!-- Logo -->
+  <div class="container">
     <div class="logo">
-      <a routerLink="/">
-        <img src="images/logo-infocaps.png" alt="InfoCaps Logo" class="logo-image">
-      </a>
+      <a routerLink="/"><img src="images/logo-infocaps.png" alt=""></a>
     </div>
-
-    <!-- Navegación -->
-    <nav class="navigation">
-      <ul class="nav-links">
-        <li><a routerLink="/courses" routerLinkActive="active" class="nav-link"> NUESTROS CURSOS!</a></li>
-        
+    
+    <nav class="nav">
+      <ul>
+        <li><a routerLink="/contabilidad" routerLinkActive="active">Contabilidad</a></li>
+        <li><a routerLink="/finanzas" routerLinkActive="active">Finanzas</a></li>
+        <li><a routerLink="/marketing" routerLinkActive="active">Marketing</a></li>
+        <li><a routerLink="/emprendimiento" routerLinkActive="active">Emprendimiento</a></li>
       </ul>
     </nav>
 
-    <!-- Autenticación -->
     <div class="auth-section">
-      <ng-container *ngIf="isLoggedIn$ | async; else notLoggedIn">
-        <div class="user-info">
-          <span>Hola, {{ (currentUser$ | async)?.firstName }}</span>
-          <button class="btn btn-outline" (click)="logout()">Cerrar sesión</button>
-        </div>
-      </ng-container>
-
-      <ng-template #notLoggedIn>
-        <a routerLink="/login" class="login-btn">Iniciar sesión</a>
-      </ng-template>
+      <div *ngIf="!isLoggedIn">
+        <a routerLink="/login" class="btn btn-primary">Iniciar sesión</a>
+      </div>
+      <div *ngIf="isLoggedIn" class="user-menu">
+        <span class="welcome-text">Bienvenido</span>
+        <button class="btn btn-secondary" (click)="logout()">Cerrar sesión</button>
+      </div>
     </div>
   </div>
 </header>

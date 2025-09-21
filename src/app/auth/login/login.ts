@@ -9,7 +9,7 @@ import { AuthService } from '../auth.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './login.html',
-  styleUrls: ['./login.css']
+  styleUrl: './login.css'
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -22,23 +22,28 @@ export class LoginComponent {
     private router: Router
   ) {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3)]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      email: ['', [
+        Validators.required,
+        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+      ]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(6)
+      ]]
     });
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
+      const { email, password } = this.loginForm.value;
       this.loading = true;
       this.errorMessage = '';
-
-      const { username, password } = this.loginForm.value;
-
-      this.authService.login(username, password).subscribe({
+      
+      this.authService.login(email, password).subscribe({
         next: (success) => {
           this.loading = false;
           if (success) {
-            this.router.navigate(['/']); // ✅ redirige al inicio o dashboard
+            this.router.navigate(['/contabilidad']);
           } else {
             this.errorMessage = 'Credenciales inválidas';
           }
@@ -55,26 +60,7 @@ export class LoginComponent {
 
   private markFormGroupTouched() {
     Object.keys(this.loginForm.controls).forEach(key => {
-      const control = this.loginForm.get(key);
-      if (control) {
-        control.markAsTouched();
-      }
+      this.loginForm.get(key)?.markAsTouched();
     });
-  }
-
-  getFieldError(fieldName: string): string {
-    const field = this.loginForm.get(fieldName);
-    if (field && field.errors && field.touched) {
-      if (field.errors['required']) {
-        return fieldName === 'username'
-          ? 'Usuario es requerido'
-          : 'Contraseña es requerida';
-      }
-      if (field.errors['minlength']) {
-        const req = field.errors['minlength'].requiredLength;
-        return `Debe tener al menos ${req} caracteres`;
-      }
-    }
-    return '';
   }
 }

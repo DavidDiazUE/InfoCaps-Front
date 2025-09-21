@@ -1,62 +1,76 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { CourseService, Course } from '../course.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
+import { LessonService } from '../../services/lesson.service';
+import { Lesson } from '../../models/lesson.model';
 
 @Component({
   selector: 'app-course-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule],
   templateUrl: './course-detail.html',
-  styleUrl: './course-detail.css',
-  providers: [CourseService]
+  styleUrl: './course-detail.css'
 })
 export class CourseDetailComponent implements OnInit {
-  course: Course | null = null;
-  isLoggedIn = false;
-  hasSubscription = false;
-  
+  lesson: Lesson | null = null;
+  category: string = '';
+  lessonId: string = '';
+  loading = true;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private courseService: CourseService,
-    private authService: AuthService
+    private authService: AuthService,
+    private lessonService: LessonService
   ) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      const category = params['category'];
-      this.loadCourse(category);
-    });
-
-    this.authService.isLoggedIn$.subscribe(loggedIn => {
-      this.isLoggedIn = loggedIn;
-    });
-
-    this.authService.currentUser$.subscribe(user => {
-      this.hasSubscription = user?.hasSubscription || false;
+      this.category = params['category'];
+      this.lessonId = params['id'];
+      this.loadLesson();
     });
   }
 
-  loadCourse(category: string) {
-    this.courseService.getCourseByCategory(category).subscribe(course => {
-      this.course = course || null;
+  loadLesson() {
+    this.loading = true;
+    const lessonIdNumber = parseInt(this.lessonId, 10);
+    
+    this.lessonService.getLessonById(lessonIdNumber).subscribe({
+      next: (lesson) => {
+        this.lesson = lesson;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading lesson:', error);
+        this.lesson = null;
+        this.loading = false;
+      }
     });
   }
 
-  enrollCourse() {
-    if (!this.isLoggedIn) {
-      this.router.navigate(['/login']);
-      return;
+  getCategoryIcon(): string {
+    switch(this.category) {
+      case 'contabilidad': return '📊';
+      case 'finanzas': return '💰';
+      case 'marketing': return '📈';
+      case 'emprendimiento': return '🚀';
+      default: return '📚';
     }
+  }
+  
+  goBack() {
+    this.router.navigate([`/${this.category}/lessons`]);
+  }
 
-    if (!this.hasSubscription) {
-      this.router.navigate(['/subscription']);
-      return;
-    }
+  markAsCompleted() {
+    // Aquí puedes implementar la lógica para marcar la lección como completada
+    console.log('Lesson marked as completed:', this.lesson?.lesson_id);
+  }
 
-    // User is logged in and has subscription - can access course
-    alert('¡Felicitaciones! Ya puedes acceder a todas las lecciones del curso.');
+  goToNextLesson() {
+    // Aquí puedes implementar la lógica para ir a la siguiente lección
+    console.log('Going to next lesson');
   }
 }

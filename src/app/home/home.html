@@ -1,61 +1,46 @@
-<div class="home-container">
-  <!-- Hero Section -->
-  <div class="hero-section">
-    <div class="hero-content">
-      <div class="hero-text">
-        <h1 class="hero-title">¡Bienvenido a InfoCaps!</h1>
-        <h2 class="hero-subtitle">Aprende algo nuevo cada día.</h2>
-        <p class="hero-fact">¿Sabías que el 60% del cuerpo humano es agua?</p>
-        <button class="explore-btn" routerLink="/courses">Explora cápsulas</button>
-      </div>
-      <div class="hero-image">
-        <img src="images/personas-leyendo.png" alt="Personas leyendo" class="illustration">
-      </div>
-    </div>
-  </div>
-
-  <!-- Categorías -->
-  <div class="categories-section">
-    <h3 class="categories-title">Categorías</h3>
-    <div class="categories-grid">
-      <div class="category-card" >
-        <div class="category-image">
-          <img src="" alt="Contabilidad Básica" class="category-img">
+<div class="home">
+  <div class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1>¡Bienvenido a InfoCaps¡</h1>
+          <h2>Aprende algo nuevo cada día.</h2>
+          <p>¿sabías que el 60% del cuerpo humano es agua?</p>
+          <button class="btn btn-primary">Explora cápsulas</button>
         </div>
-        <h4>Contabilidad Básica</h4>
-      </div>
-
-      <div class="category-card" >
-        <div class="category-image">
-          <img src="" alt="Finanzas Personales" class="category-img">
+        <div class="hero-image">
+          <div class="infocaps-logo">
+           <img src="images/personas-leyendo.png" alt="">
+           
+          </div>
         </div>
-        <h4>Finanzas Personales</h4>
       </div>
+    </section>
 
-      <div class="category-card" >
-        <div class="category-image">
-          <img src="" alt="Marketing Digital" class="category-img">
+    <!-- Categories Section -->
+    <section class="categories">
+      <h2>Categorías</h2>
+      <div class="categories-grid">
+        <div class="category-card" *ngFor="let category of categories">
+          <div class="category-icon" [ngClass]="'category-' + category.name.toLowerCase()">
+            <span>{{ category.icon }}</span>
+          </div>
+          <h3>{{ category.name }}</h3>
         </div>
-        <h4>Marketing Digital</h4>
       </div>
+    </section>
 
-      <div class="category-card" >
-        <div class="category-image">
-          <img src="" alt="Emprendimiento" class="category-img">
+    <!-- CTA Section -->
+    <section class="cta">
+      <div class="cta-content">
+        <h2>Aprende algo nuevo todos los días en menos de 5 minutos</h2>
+        <div class="cta-buttons">
+          <a routerLink="/login"><button class="btn btn-primary">Empieza ahora</button>
+            </a>
+          <a routerLink="/signup" class="register-link">Regístrate</a>
         </div>
-        <h4>Emprendimiento</h4>
       </div>
-    </div>
-  </div>
-
-  
-  <div class="cta-section">
-    <div class="cta-content">
-      <h3>Aprende algo nuevo todos los días en menos de 5 minutos</h3>
-      <div class="cta-buttons">
-        <button class="cta-btn primary" routerLink="/login">Empieza ahora</button>
-        <button class="cta-btn secondary" routerLink="/signup">Regístrate</button>
-      </div>
-    </div>
+    </section>
   </div>
 </div>

@@ -1,24 +1,52 @@
 <div class="signup-container">
   <div class="signup-card">
-    <!-- Encabezado con logo -->
     <div class="signup-header">
-      <img src="/assets/images/logo.png" alt="InfoCaps Logo" class="logo-image">
-      <h2 class="signup-title">Regístrate</h2>
+      <div class="logo"><img src="images/logo-infocaps.png" alt=""></div>
+      <h2>Crear cuenta</h2>
     </div>
+    
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">Nombre</label>
+          <input
+            type="text"
+            id="firstName"
+            formControlName="firstName"
+            placeholder="Ingrese su nombre"
+            [class.error]="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched"
+          >
+          <div class="field-error" *ngIf="getFieldError('firstName')">
+            {{ getFieldError('firstName') }}
+          </div>
+        </div>
 
-    <!-- Formulario Angular -->
-    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="signup-form">
+        <div class="form-group">
+          <label for="lastName">Apellido</label>
+          <input
+            type="text"
+            id="lastName"
+            formControlName="lastName"
+            placeholder="Ingrese su apellido"
+            [class.error]="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched"
+          >
+          <div class="field-error" *ngIf="getFieldError('lastName')">
+            {{ getFieldError('lastName') }}
+          </div>
+        </div>
+      </div>
+
       <div class="form-group">
-        <label for="username">Usuario</label>
+        <label for="email">Email</label>
         <input
-          type="text"
-          id="username"
-          formControlName="username"
-          placeholder="Ingrese aquí su usuario"
-          [class.error]="signupForm.get('username')?.invalid && signupForm.get('username')?.touched"
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="Ingrese su email"
+          [class.error]="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
         >
-        <div class="error-message" *ngIf="getFieldError('username')">
-          {{ getFieldError('username') }}
+        <div class="field-error" *ngIf="getFieldError('email')">
+          {{ getFieldError('email') }}
         </div>
       </div>
 
@@ -28,27 +56,41 @@
           type="password"
           id="password"
           formControlName="password"
-          placeholder="Ingrese aquí su contraseña"
+          placeholder="Ingrese su contraseña (mínimo 6 caracteres)"
           [class.error]="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
         >
-        <div class="error-message" *ngIf="getFieldError('password')">
+        <div class="field-error" *ngIf="getFieldError('password')">
           {{ getFieldError('password') }}
         </div>
       </div>
 
-      <div class="error-message" *ngIf="errorMessage">
-        {{ errorMessage }}
+      <div class="form-group">
+        <label for="confirmPassword">Confirmar Contraseña</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          placeholder="Confirme su contraseña"
+          [class.error]="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched"
+        >
+        <div class="field-error" *ngIf="getFieldError('confirmPassword')">
+          {{ getFieldError('confirmPassword') }}
+        </div>
       </div>
 
-      <button type="submit" class="signup-btn" [disabled]="loading">
+      <button type="submit" class="btn btn-primary" [disabled]="loading">
         <span *ngIf="loading">Creando cuenta...</span>
-        <span *ngIf="!loading">Regístrate</span>
+        <span *ngIf="!loading">Crear Cuenta</span>
       </button>
     </form>
 
-    <!-- Enlace de login -->
-    <div class="login-link">
-      <p>¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p>
+    <div class="server-error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+    <div class="login-section">
+      <p>¿Ya tienes cuenta?</p>
+      <a routerLink="/login" class="login-link">Inicia sesión aquí</a>
     </div>
   </div>
 </div>

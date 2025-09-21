@@ -1,88 +1,57 @@
-<div class="course-detail-container" *ngIf="course">
+<div class="lesson-detail-container">
   <div class="container">
-    <div class="course-header">
-      <div class="course-info">
-        <div class="breadcrumb">
-          <a routerLink="/courses">Cursos</a> / {{ course.title }}
+    <div class="lesson-header">
+      <button class="back-btn" (click)="goBack()">← Volver a Lecciones</button>
+      <div class="category-info">
+        <div class="category-icon" [ngClass]="'category-' + category">
+          <span>{{ getCategoryIcon() }}</span>
         </div>
-        
-        <h1>{{ course.title }}</h1>
-        <p class="course-description">{{ course.description }}</p>
-        
-        <div class="course-stats">
-          <div class="stat">
-            <span class="icon">⏱️</span>
-            <span>{{ course.duration }}</span>
-          </div>
-          <div class="stat">
-            <span class="icon">📚</span>
-            <span>{{ course.lessons.length }} lecciones</span>
-          </div>
-          <div class="stat">
-            <span class="icon">🎯</span>
-            
-          </div>
-        </div>
-        
-        <div class="enrollment-section">
-          <div class="price">${{ course.price }}</div>
-          <button class="btn btn-primary btn-large" (click)="enrollCourse()">
-            <ng-container *ngIf="!isLoggedIn">Inscribirse al Curso</ng-container>
-            <ng-container *ngIf="isLoggedIn && !hasSubscription">Obtener Suscripción</ng-container>
-            <ng-container *ngIf="isLoggedIn && hasSubscription">Acceder al Curso</ng-container>
-          </button>
-        </div>
-      </div>
-      
-      <div class="course-image">
-        <img [src]="course.image" [alt]="course.title">
+        <h1>{{ lesson?.lesson_title }}</h1>
       </div>
     </div>
 
-    <div class="course-content">
-      <div class="course-syllabus">
-        <h2>Contenido del Curso</h2>
-        <div class="lessons-list">
-          <div class="lesson-item" *ngFor="let lesson of course.lessons; let i = index">
-            <div class="lesson-number">{{ i + 1 }}</div>
-            <div class="lesson-info">
-              <h3>{{ lesson.title }}</h3>
-              <p>{{ lesson.description }}</p>
-              <div class="lesson-duration">{{ lesson.duration }}</div>
-            </div>
-            <div class="lesson-status">
-              <span class="lock-icon" *ngIf="!hasSubscription">🔒</span>
-              <span class="play-icon" *ngIf="hasSubscription">▶️</span>
-            </div>
+    <div class="lesson-content" *ngIf="lesson">
+      <div class="video-section" *ngIf="lesson.content_url">
+        <div class="media-placeholder">
+          <p>Aquí puedes agregar tu video o imagen de la lección</p>
+          <!-- <img src="ruta-a-tu-imagen-leccion.jpg" alt="Imagen de la lección"> -->
+          <!-- <video src="ruta-a-tu-video.mp4" controls></video> -->
+        </div>
+      </div>
+
+      <div class="content-section">
+        <div class="lesson-info">
+          <p><strong>Duración:</strong> {{ lesson.duration_minutes || 5 }} minutos</p>
+          <p><strong>Tipo de contenido:</strong> {{ lesson.content_type || 'Texto' }}</p>
+          <p><strong>Orden:</strong> Lección {{ lesson.order_number }}</p>
+        </div>
+        
+        <div class="lesson-text">
+          <h3>Contenido de la lección</h3>
+          <div *ngIf="lesson.content_url">
+            <p><strong>URL del contenido:</strong> {{ lesson.content_url }}</p>
+            <p>Aquí se mostraría el contenido cargado desde: {{ lesson.content_url }}</p>
+          </div>
+          <div *ngIf="!lesson.content_url">
+            <p>Esta lección forma parte del curso de {{ category | titlecase }} y está diseñada para proporcionarte conocimientos prácticos y aplicables en {{ lesson.lesson_title.toLowerCase() }}.</p>
+            <p>El contenido específico de esta lección se encuentra en desarrollo.</p>
           </div>
         </div>
       </div>
 
-      <div class="course-sidebar">
-        <div class="info-card">
-          <h3>Lo que aprenderás</h3>
-          <ul>
-            <li *ngFor="let lesson of course.lessons">{{ lesson.title }}</li>
-          </ul>
-        </div>
-        
-        <div class="info-card">
-          <h3>Requisitos</h3>
-          <ul>
-            <li>Conocimientos básicos de computación</li>
-            <li>Acceso a internet</li>
-            <li>Ganas de aprender</li>
-          </ul>
-        </div>
+      <div class="lesson-actions">
+        <button class="btn-complete" (click)="markAsCompleted()">Marcar como completada</button>
+        <button class="btn-next" (click)="goToNextLesson()">Siguiente lección →</button>
       </div>
     </div>
-  </div>
-</div>
 
-<div class="not-found" *ngIf="!course">
-  <div class="container">
-    <h2>Curso no encontrado</h2>
-    <p>El curso que buscas no existe o ha sido eliminado.</p>
-    <a routerLink="/courses" class="btn btn-primary">Ver todos los cursos</a>
+    <div class="loading" *ngIf="loading">
+      Cargando lección...
+    </div>
+    
+    <div class="error-message" *ngIf="!loading && !lesson">
+      <p>No se pudo cargar la lección. Por favor, intenta nuevamente.</p>
+      <button class="btn-back" (click)="goBack()">Volver al curso</button>
+    </div>
   </div>
 </div>

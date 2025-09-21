@@ -10,5 +10,26 @@ import { RouterModule } from '@angular/router';
   styleUrl: './home.css'
 })
 export class HomeComponent {
-  
+  categories = [
+    {
+      name: 'Contabilidad',
+      icon: '📊',
+      route: '/contabilidad'
+    },
+    {
+      name: 'Finanzas',
+      icon: '💰',
+      route: '/finanzas'
+    },
+    {
+      name: 'Marketing',
+      icon: '📈',
+      route: '/marketing'
+    },
+    {
+      name: 'Emprendimiento',
+      icon: '🚀',
+      route: '/emprendimiento'
+    }
+  ];
 }

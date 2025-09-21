@@ -1,100 +1,46 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-
-export interface User {
-  id: number;
-  email: string;
-  firstName: string;
-  lastName: string;
-  hasSubscription: boolean;
-}
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { UserService } from '../services/user.service';
+import { User, LoginRequest } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private isLoggedInSubject = new BehaviorSubject<boolean>(false);
-  private currentUserSubject = new BehaviorSubject<User | null>(null);
+  public isLoggedIn$: Observable<boolean>;
+  public currentUser$: Observable<User | null>;
 
-  public isLoggedIn$ = this.isLoggedInSubject.asObservable();
-  public currentUser$ = this.currentUserSubject.asObservable();
+  constructor(
+    private userService: UserService,
 
-  constructor() {
-    // Check if user is logged in from localStorage
-    const userData = localStorage.getItem('currentUser');
-    if (userData) {
-      const user = JSON.parse(userData);
-      this.currentUserSubject.next(user);
-      this.isLoggedInSubject.next(true);
-    }
+  ) {
+    this.isLoggedIn$ = this.userService.isLoggedIn$;
+    this.currentUser$ = this.userService.currentUser$;
   }
 
   login(email: string, password: string): Observable<boolean> {
-    return new Observable(observer => {
-      // Simulate API call
-      setTimeout(() => {
-        if (email && password) {
-          const user: User = {
-            id: 1,
-            email: email,
-            firstName: 'Usuario',
-            lastName: 'Demo',
-            hasSubscription: false
-          };
-          
-          localStorage.setItem('currentUser', JSON.stringify(user));
-          this.currentUserSubject.next(user);
-          this.isLoggedInSubject.next(true);
-          observer.next(true);
-        } else {
-          observer.next(false);
-        }
-        observer.complete();
-      }, 1000);
-    });
+    const loginData: LoginRequest = { email, password };
+    return this.userService.login(loginData);
   }
 
   signup(userData: any): Observable<boolean> {
-    return new Observable(observer => {
-      // Simulate API call
-      setTimeout(() => {
-        const user: User = {
-          id: Date.now(),
-          email: userData.email,
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-          hasSubscription: false
-        };
-        
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
-        this.isLoggedInSubject.next(true);
-        observer.next(true);
-        observer.complete();
-      }, 1000);
-    });
+    return this.userService.createUser(userData).pipe(
+      map(createdUser => !!createdUser)
+    );
   }
 
   logout(): void {
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
-    this.isLoggedInSubject.next(false);
+    this.userService.logout();
   }
 
   isAuthenticated(): boolean {
-    return this.isLoggedInSubject.value;
+    return this.userService.isAuthenticated();
   }
 
   getCurrentUser(): User | null {
-    return this.currentUserSubject.value;
+    return this.userService.getCurrentUser();
   }
 
-  updateSubscriptionStatus(hasSubscription: boolean): void {
-    const currentUser = this.getCurrentUser();
-    if (currentUser) {
-      currentUser.hasSubscription = hasSubscription;
-      localStorage.setItem('currentUser', JSON.stringify(currentUser));
-      this.currentUserSubject.next(currentUser);
-    }
-  }
+
 }
