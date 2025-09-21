@@ -11,10 +11,7 @@ export class AuthService {
   public isLoggedIn$: Observable<boolean>;
   public currentUser$: Observable<User | null>;
 
-  constructor(
-    private userService: UserService,
-
-  ) {
+  constructor(private userService: UserService) {
     this.isLoggedIn$ = this.userService.isLoggedIn$;
     this.currentUser$ = this.userService.currentUser$;
   }
@@ -24,7 +21,7 @@ export class AuthService {
     return this.userService.login(loginData);
   }
 
-  signup(userData: any): Observable<boolean> {
+  signup(userData: User): Observable<boolean> {
     return this.userService.createUser(userData).pipe(
       map(createdUser => !!createdUser)
     );
@@ -41,6 +38,4 @@ export class AuthService {
   getCurrentUser(): User | null {
     return this.userService.getCurrentUser();
   }
-
-
 }

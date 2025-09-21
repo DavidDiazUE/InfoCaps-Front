@@ -1,16 +1,11 @@
+// user.model.ts
 export interface User {
-  user_id?: number;
-  id?: number; // Para compatibilidad
-  first_name: string;
-  last_name: string;
+  user_id?: number;  // ✅ único identificador
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
-  phone?: string;
-  business_type?: string;
-  location?: string;
-  registration_date?: string;
-  status?: string;
-  hasSubscription?: boolean; // Para el guard
+  hasSubscription?: boolean; // opcional si lo usas para el guard
 }
 
 export interface LoginRequest {

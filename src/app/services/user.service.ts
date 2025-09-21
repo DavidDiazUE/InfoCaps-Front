@@ -16,7 +16,6 @@ export class UserService {
   public isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
   constructor(private apiService: ApiService) {
-    // Verificar si hay usuario en localStorage al inicializar
     this.checkStoredUser();
   }
 
@@ -27,7 +26,6 @@ export class UserService {
         const user = JSON.parse(storedUser);
         this.currentUserSubject.next(user);
         this.isLoggedInSubject.next(true);
-        console.log('👤 Usuario cargado desde localStorage:', user);
       } catch (error) {
         console.error('Error parsing stored user:', error);
         localStorage.removeItem('currentUser');
@@ -35,37 +33,23 @@ export class UserService {
     }
   }
 
-  // Crear usuario (registro) - simplificado sin teléfono ni tipo de negocio
+  // Crear usuario (registro)
   createUser(userData: CreateUserRequest): Observable<User> {
     const requestData: CreateUserRequest = {
-      first_name: userData.first_name,
-      last_name: userData.last_name,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
       email: userData.email,
       password: userData.password
     };
 
-    console.log('📝 Creating user with data:', requestData);
-
     return this.apiService.post<BackendUserResponse>('user-sav', requestData).pipe(
-      map((response: BackendUserResponse) => {
-        console.log('✅ User created successfully:', response);
-        
-        // Convertir respuesta del backend al modelo User
-        const user: User = {
-          user_id: response.user_id,
-          first_name: response.first_name,
-          last_name: response.last_name,
-          email: response.email,
-          password: response.password,
-          phone: response.phone || '',
-          business_type: response.business_type || '',
-          location: response.location || '',
-          registration_date: response.registration_date,
-          status: response.status
-        };
-
-        return user;
-      }),
+      map((response: BackendUserResponse) => ({
+        user_id: response.user_id,
+        firstName: response.firstName,
+        lastName: response.lastName,
+        email: response.email,
+        password: response.password
+      })),
       catchError(error => {
         console.error('❌ Error creating user:', error);
         throw error;
@@ -73,37 +57,24 @@ export class UserService {
     );
   }
 
-  // Login (buscar usuario por email)
+  // Login
   login(loginData: LoginRequest): Observable<boolean> {
-    console.log('🔐 Attempting login for:', loginData.email);
-    
     return this.apiService.get<BackendUserResponse>('user-email', { correo: loginData.email }).pipe(
       map((response: BackendUserResponse) => {
-        console.log('👤 User found:', response);
-        
-        if (response && response.password === loginData.password && response.status === 'active') {
-          // Convertir respuesta del backend al modelo User
+        if (response && response.password === loginData.password) {
           const user: User = {
             user_id: response.user_id,
-            first_name: response.first_name,
-            last_name: response.last_name,
+            firstName: response.firstName,
+            lastName: response.lastName,
             email: response.email,
-            password: response.password,
-            phone: response.phone || '',
-            business_type: response.business_type || '',
-            location: response.location || '',
-            registration_date: response.registration_date,
-            status: response.status
+            password: response.password
           };
 
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
           this.isLoggedInSubject.next(true);
-          console.log('✅ Login successful');
           return true;
         }
-        
-        console.log('❌ Invalid credentials or inactive user');
         return false;
       }),
       catchError(error => {
@@ -116,37 +87,27 @@ export class UserService {
   // Obtener todos los usuarios
   getAllUsers(): Observable<User[]> {
     return this.apiService.get<BackendUserResponse[]>('user-all').pipe(
-      map((responses: BackendUserResponse[]) => 
+      map((responses: BackendUserResponse[]) =>
         responses.map(response => ({
           user_id: response.user_id,
-          first_name: response.first_name,
-          last_name: response.last_name,
+          firstName: response.firstName,
+          lastName: response.lastName,
           email: response.email,
-          password: response.password,
-          phone: response.phone || '',
-          business_type: response.business_type || '',
-          location: response.location || '',
-          registration_date: response.registration_date,
-          status: response.status
+          password: response.password
         }))
       )
     );
   }
 
   // Obtener usuario por ID
-  getUserById(id: number): Observable<User> {
-    return this.apiService.get<BackendUserResponse>('user-id', { id }).pipe(
+  getUserById(user_id: number): Observable<User> {
+    return this.apiService.get<BackendUserResponse>('user-id', { id: user_id }).pipe(
       map((response: BackendUserResponse) => ({
         user_id: response.user_id,
-        first_name: response.first_name,
-        last_name: response.last_name,
+        firstName: response.firstName,
+        lastName: response.lastName,
         email: response.email,
-        password: response.password,
-        phone: response.phone || '',
-        business_type: response.business_type || '',
-        location: response.location || '',
-        registration_date: response.registration_date,
-        status: response.status
+        password: response.password
       }))
     );
   }
@@ -157,18 +118,12 @@ export class UserService {
       map((response: BackendUserResponse) => {
         const updatedUser: User = {
           user_id: response.user_id,
-          first_name: response.first_name,
-          last_name: response.last_name,
+          firstName: response.firstName,
+          lastName: response.lastName,
           email: response.email,
-          password: response.password,
-          phone: response.phone || '',
-          business_type: response.business_type || '',
-          location: response.location || '',
-          registration_date: response.registration_date,
-          status: response.status
+          password: response.password
         };
 
-        // Actualizar usuario en localStorage si es el usuario actual
         const currentUser = this.currentUserSubject.value;
         if (currentUser && currentUser.user_id === user.user_id) {
           localStorage.setItem('currentUser', JSON.stringify(updatedUser));
@@ -180,24 +135,20 @@ export class UserService {
   }
 
   // Eliminar usuario
-  deleteUser(id: number): Observable<string> {
-    return this.apiService.delete<string>(`user-del/${id}`);
+  deleteUser(user_id: number): Observable<string> {
+    return this.apiService.delete<string>(`user-del/${user_id}`);
   }
 
-  // Logout
   logout(): void {
-    console.log('👋 Logging out user');
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
     this.isLoggedInSubject.next(false);
   }
 
-  // Obtener usuario actual
   getCurrentUser(): User | null {
     return this.currentUserSubject.value;
   }
 
-  // Verificar si está autenticado
   isAuthenticated(): boolean {
     return this.isLoggedInSubject.value;
   }

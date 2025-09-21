@@ -18,14 +18,9 @@ export interface PaginatedResponse<T> {
 
 export interface UserResponse {
   user_id: number;
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  phone?: string;
-  business_type?: string;
-  location?: string;
-  registration_date: string;
-  status: string;
 }
 
 export interface LessonResponse {
@@ -54,14 +49,10 @@ export interface CourseResponse {
 
 export interface BackendUserResponse {
   user_id: number;
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
-  phone?: string;
-  business_type?: string;
-  location?: string;
-  registration_date: string;
   status: string;
 }
 
@@ -94,13 +85,10 @@ export interface BackendLessonResponse {
 
 
 export interface CreateUserRequest {
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
-  phone?: string;
-  business_type?: string;
-  location?: string;
 }
 
 export interface LoginRequest {

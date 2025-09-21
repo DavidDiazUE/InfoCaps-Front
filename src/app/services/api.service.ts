@@ -7,7 +7,7 @@ import { catchError, tap, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = '/api'; 
+  private baseUrl = 'http://localhost:8080';  // ✅ corregido
 
   constructor(private http: HttpClient) {}
 
@@ -18,7 +18,6 @@ export class ApiService {
     });
   }
 
-  
   get<T>(endpoint: string, params?: any): Observable<T> {
     let httpParams = new HttpParams();
     if (params) {
@@ -28,25 +27,17 @@ export class ApiService {
         }
       });
     }
-    
+
     const url = endpoint.startsWith('/') ? endpoint.substring(1) : endpoint;
     console.log(`🔄 GET Request: ${this.baseUrl}/${url}`, params);
-    
+
     return this.http.get<T>(`${this.baseUrl}/${url}`, {
       headers: this.getHeaders(),
       params: httpParams
     }).pipe(
-      tap(response => {
-        console.log(`✅ GET ${url} Success:`, response);
-      }),
+      tap(response => console.log(`✅ GET ${url} Success:`, response)),
       catchError(error => {
         console.error(`❌ GET ${url} Error:`, error);
-        console.error('Error details:', {
-          status: error.status,
-          statusText: error.statusText,
-          url: error.url,
-          message: error.message
-        });
         return throwError(() => error);
       })
     );

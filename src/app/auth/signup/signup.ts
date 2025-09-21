@@ -75,8 +75,8 @@ export class SignupComponent {
       this.errorMessage = '';
       
       const userData: CreateUserRequest = {
-        first_name: this.signupForm.value.firstName,
-        last_name: this.signupForm.value.lastName,
+        firstName: this.signupForm.value.firstName,
+        lastName: this.signupForm.value.lastName,
         email: this.signupForm.value.email,
         password: this.signupForm.value.password
       };

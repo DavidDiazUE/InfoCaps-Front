@@ -18,7 +18,7 @@ export class LessonService {
       ...lesson,
       status: 'active'
     };
-    return this.apiService.post<BackendLessonResponse>('lessons', lessonData).pipe(
+    return this.apiService.post<BackendLessonResponse>('leccion-sav', lessonData).pipe(
       map(this.mapBackendLessonToLesson)
     );
   }
@@ -39,19 +39,18 @@ export class LessonService {
   }
 
   // Obtener lección por ID
-getLessonById(id: number): Observable<Lesson> {
-  console.log('📖 Getting lesson by ID:', id);
-  return this.apiService.get<BackendLessonResponse>('leccion/id', { id }).pipe(
-    map(this.mapBackendLessonToLesson),
-    catchError(error => {
-      console.error('❌ Error getting lesson by ID:', error);
-      throw error;
-    })
-  );
-}
+  getLessonById(id: number): Observable<Lesson> {
+    console.log('📖 Getting lesson by ID:', id);
+    return this.apiService.get<BackendLessonResponse>('leccion', { id }).pipe(
+      map(this.mapBackendLessonToLesson),
+      catchError(error => {
+        console.error('❌ Error getting lesson by ID:', error);
+        throw error;
+      })
+    );
+  }
 
-
-  // Obtener lecciones por curso (filtrar por course_id)
+  // Obtener lecciones por curso (filtra en frontend)
   getLessonsByCourse(courseId: number): Observable<Lesson[]> {
     console.log('📚 Getting lessons for course ID:', courseId);
     return this.getAllLessons().pipe(
@@ -59,45 +58,25 @@ getLessonById(id: number): Observable<Lesson> {
         const filteredLessons = lessons.filter(lesson =>
           lesson.course_id === courseId && lesson.status === 'published'
         );
-        const sortedLessons = filteredLessons.sort((a, b) => a.order_number - b.order_number);
-        console.log('📚 Filtered and sorted lessons:', sortedLessons);
-        return sortedLessons;
+        return filteredLessons.sort((a, b) => a.order_number - b.order_number);
       })
     );
   }
 
-  // Obtener lecciones por categoría (necesitarás mapear categorías a course_ids)
+  // Obtener lecciones por categoría (filtra en frontend)
   getLessonsByCategory(category: string): Observable<Lesson[]> {
     console.log('📚 Getting lessons for category:', category);
-    
-    // Mapeo de categorías a nombres de categorías del backend
-    const categoryToBackendName: { [key: string]: string } = {
-      'contabilidad': 'Negocios',
-      'finanzas': 'Negocios', 
-      'marketing': 'Negocios',
-      'emprendimiento': 'Negocios'
-    };
-
-    const backendCategoryName = categoryToBackendName[category];
-    if (!backendCategoryName) {
-      console.log('❌ No backend category name found for category:', category);
-      return of([]);
-    }
-
-    console.log('📚 Getting lessons for backend category:', backendCategoryName);
     return this.getAllLessons().pipe(
       map(lessons => {
-        const filteredLessons = lessons.filter(lesson => 
+        const filteredLessons = lessons.filter(lesson =>
           lesson.status === 'published'
         );
-        const sortedLessons = filteredLessons.sort((a, b) => a.order_number - b.order_number);
-        console.log('📚 Filtered lessons for category:', category, sortedLessons);
-        return sortedLessons;
+        return filteredLessons.sort((a, b) => a.order_number - b.order_number);
       })
     );
   }
 
-  // Obtener lecciones por status
+  // Obtener lecciones por status (filtra en frontend)
   getLessonsByStatus(status: string): Observable<Lesson[]> {
     return this.getAllLessons().pipe(
       map(lessons => lessons.filter(lesson => lesson.status === status))
@@ -106,24 +85,27 @@ getLessonById(id: number): Observable<Lesson> {
 
   // Actualizar lección
   updateLesson(lesson: Lesson): Observable<Lesson> {
-    return this.apiService.put<BackendLessonResponse>(`lessons/${lesson.lesson_id}`, lesson).pipe(
+    return this.apiService.put<BackendLessonResponse>('leccion-act', lesson).pipe(
       map(this.mapBackendLessonToLesson)
     );
   }
 
-  // Eliminar lección (cambiar status a inactive)
+  // ⚠️ Eliminar lección
+  // Tu backend no tiene DELETE, así que esta función no funcionará
+  // Si quieres "eliminar", debes usar updateLesson y mandar status = 'inactive'
   deleteLesson(id: number): Observable<string> {
-    return this.apiService.delete<string>(`lessons/${id}`);
+    console.warn('⚠️ deleteLesson no tiene endpoint en el backend');
+    return of('No implementado en backend');
   }
 
-  // Obtener lecciones activas
+  // Obtener solo lecciones activas
   getActiveLessons(): Observable<Lesson[]> {
     return this.getAllLessons().pipe(
       map(lessons => lessons.filter(lesson => lesson.status === 'published'))
     );
   }
 
-  // Función helper para mapear respuesta del backend al modelo Lesson
+  // Helper para mapear respuesta del backend
   private mapBackendLessonToLesson(response: BackendLessonResponse): Lesson {
     console.log('🔄 Mapping backend lesson:', response);
     return {
