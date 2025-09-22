@@ -8,7 +8,13 @@ import { AccessibilityToolbar } from './accessibility-toolbar/accessibility-tool
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterModule, HeaderComponent, FooterComponent, AccessibilityToolbar],
+  imports: [
+    CommonModule,
+    RouterModule,
+    HeaderComponent,
+    FooterComponent,
+    AccessibilityToolbar,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

@@ -58,31 +58,30 @@ export interface BackendUserResponse {
 
 
 export interface BackendLessonResponse {
-  id: number;
-  course: {
-    id: number;
-    title: string;
-    description: string;
-    category: {
-      id: number;
-      name: string;
-      description: string;
-      iconUrl: string;
-      status: string;
-    };
-    level: string;
-    durationHours: number;
-    creationDate: string;
-    status: string;
-  };
+  id: number;  // 👈 en lugar de lesson_id
   lessonTitle: string;
   contentUrl?: string;
   orderNumber: number;
   durationMinutes?: number;
   contentType?: string;
   status: string;
+  course?: {
+    id: number; // 👈 en lugar de course_id
+    title: string;
+    description: string;
+    level: string;
+    durationHours: number;
+    creationDate: string;
+    status: string;
+    category?: {
+      id: number;
+      name: string;
+      description: string;
+      iconUrl: string;
+      status: string;
+    };
+  };
 }
-
 
 export interface CreateUserRequest {
   firstName: string;

@@ -70,17 +70,17 @@
       </div>
       
       <div class="lessons-list" *ngIf="!loading && lessons.length > 0">
-        <div class="lesson-card" *ngFor="let lesson of lessons" [attr.data-lesson-id]="lesson.lesson_id">
+        <div class="lesson-card" *ngFor="let lesson of lessons" [attr.data-lesson-id]="lesson.id">
           <div class="lesson-content">
-            <div class="lesson-number">{{ lesson.order_number }}</div>
+            <div class="lesson-number">{{ lesson.orderNumber }}</div>
             <div class="lesson-info">
-              <h3 class="lesson-title">{{ lesson.lesson_title }}</h3>
+              <h3 class="lesson-title">{{ lesson.lessonTitle }}</h3>
               <p class="lesson-description">
-                Aprende sobre {{ lesson.lesson_title.toLowerCase() }} - Duración: {{ lesson.duration_minutes || 5 }} minutos
+                Aprende sobre {{ lesson.lessonTitle.toLowerCase() }} - Duración: {{ lesson.durationMinutes || 5 }} minutos
               </p>
               <div class="lesson-meta">
-                <span class="lesson-type">{{ lesson.content_type || 'Texto' }}</span>
-                <span class="lesson-duration">{{ lesson.duration_minutes || 5 }} min</span>
+                <span class="lesson-type">{{ lesson.contentType || 'Texto' }}</span>
+                <span class="lesson-duration">{{ lesson.durationMinutes || 5 }} min</span>
               </div>
             </div>
             <button class="btn-view-lesson" (click)="viewLesson(lesson)">

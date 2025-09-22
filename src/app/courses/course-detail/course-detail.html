@@ -6,12 +6,12 @@
         <div class="category-icon" [ngClass]="'category-' + category">
           <span>{{ getCategoryIcon() }}</span>
         </div>
-        <h1>{{ lesson?.lesson_title }}</h1>
+        <h1>{{ lesson?.lessonTitle }}</h1>
       </div>
     </div>
 
     <div class="lesson-content" *ngIf="lesson">
-      <div class="video-section" *ngIf="lesson.content_url">
+      <div class="video-section" *ngIf="lesson.contentUrl">
         <div class="media-placeholder">
           <p>Aquí puedes agregar tu video o imagen de la lección</p>
           <!-- <img src="ruta-a-tu-imagen-leccion.jpg" alt="Imagen de la lección"> -->
@@ -21,19 +21,19 @@
 
       <div class="content-section">
         <div class="lesson-info">
-          <p><strong>Duración:</strong> {{ lesson.duration_minutes || 5 }} minutos</p>
-          <p><strong>Tipo de contenido:</strong> {{ lesson.content_type || 'Texto' }}</p>
-          <p><strong>Orden:</strong> Lección {{ lesson.order_number }}</p>
+          <p><strong>Duración:</strong> {{ lesson.durationMinutes || 5 }} minutos</p>
+          <p><strong>Tipo de contenido:</strong> {{ lesson.contentType || 'Texto' }}</p>
+          <p><strong>Orden:</strong> Lección {{ lesson.orderNumber }}</p>
         </div>
         
         <div class="lesson-text">
           <h3>Contenido de la lección</h3>
-          <div *ngIf="lesson.content_url">
-            <p><strong>URL del contenido:</strong> {{ lesson.content_url }}</p>
-            <p>Aquí se mostraría el contenido cargado desde: {{ lesson.content_url }}</p>
+          <div *ngIf="lesson.contentUrl">
+            <p><strong>URL del contenido:</strong> {{ lesson.contentUrl }}</p>
+            <p>Aquí se mostraría el contenido cargado desde: {{ lesson.contentUrl }}</p>
           </div>
-          <div *ngIf="!lesson.content_url">
-            <p>Esta lección forma parte del curso de {{ category | titlecase }} y está diseñada para proporcionarte conocimientos prácticos y aplicables en {{ lesson.lesson_title.toLowerCase() }}.</p>
+          <div *ngIf="!lesson.contentUrl">
+            <p>Esta lección forma parte del curso de {{ category | titlecase }} y está diseñada para proporcionarte conocimientos prácticos y aplicables en {{ lesson.lessonTitle.toLowerCase() }}.</p>
             <p>El contenido específico de esta lección se encuentra en desarrollo.</p>
           </div>
         </div>

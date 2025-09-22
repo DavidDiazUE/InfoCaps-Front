@@ -20,6 +20,7 @@ export class CourseListComponent implements OnInit {
   lessons: Lesson[] = [];
   loading = false;
   isLoggedIn = false;
+  courseId: number = 0;  // 👈 Nuevo: almacenamos el ID del curso
   
   courseInfo = {
     title: '',
@@ -44,8 +45,10 @@ export class CourseListComponent implements OnInit {
     if (!this.category) {
       this.category = this.route.snapshot.url[0]?.path || '';
     }
-    
-    console.log('📚 Category:', this.category);
+
+    // Obtener courseId desde parámetros de la URL
+    this.courseId = Number(this.route.snapshot.paramMap.get('id')) || 0;
+    console.log('📚 Category:', this.category, '🆔 CourseId:', this.courseId);
     
     // Configurar información del curso
     this.setCategoryData();
@@ -166,8 +169,8 @@ export class CourseListComponent implements OnInit {
       return;
     }
     
-    console.log('✅ Navigating to lesson:', lesson.lesson_id);
-    this.router.navigate(['/lesson', this.category, lesson.lesson_id]);
+    console.log('✅ Navigating to lesson:', lesson.id);
+    this.router.navigate(['/lesson', this.courseId, lesson.id]);
   }
 
   private loadLessonsFromBackend() {
@@ -177,16 +180,16 @@ export class CourseListComponent implements OnInit {
       return;
     }
     
-    console.log('📚 Loading lessons from backend for category:', this.category);
+    console.log('📚 Loading lessons from backend for courseId:', this.courseId);
     this.loading = true;
     
-    this.lessonService.getLessonsByCategory(this.category).subscribe({
+    this.lessonService.getLessonsByCourse(this.courseId).subscribe({
       next: (lessons) => {
         console.log('✅ Lessons loaded successfully:', lessons);
         this.lessons = lessons;
         this.courseInfo.totalLessons = lessons.length;
         this.courseInfo.estimatedDuration = lessons.reduce((total, lesson) => 
-          total + (lesson.duration_minutes || 5), 0
+          total + (lesson.durationMinutes || 5), 0
         );
         this.loading = false;
         

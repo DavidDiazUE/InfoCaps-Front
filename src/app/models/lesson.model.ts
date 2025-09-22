@@ -1,29 +1,29 @@
 export interface Lesson {
-  lesson_id?: number;
-  course_id: number;
-  lesson_title: string;
-  content_url?: string;
-  order_number: number;
-  duration_minutes?: number;
-  content_type?: string;
+  id: number;
+  lessonTitle: string;
+  contentUrl: string;
+  orderNumber: number;
+  durationMinutes: number;
+  contentType: string;
   status: string;
+  course: Course;   // 👈 obligatorio
 }
 
 export interface Course {
-  course_id?: number;
+  id: number;
   title: string;
   description: string;
-  category_id: number;
   level: string;
-  duration_hours?: number;
-  creation_date?: string;
+  durationHours: number;
+  creationDate: string;
   status: string;
+  category: Category;
 }
 
 export interface Category {
-  category_id?: number;
+  id: number;
   name: string;
   description: string;
-  icon_url: string;
+  iconUrl: string;
   status: string;
 }

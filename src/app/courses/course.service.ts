@@ -5,13 +5,11 @@ export interface Course {
   id: number;
   title: string;
   description: string;
-  category: string;
+  category: { id: number; name: string }; // 👈 como en backend
   level: string;
-  duration: number;
-  instructor: string;
-  price: number;
-  imageUrl: string;
-  lessons: Lesson[];
+  durationHours: number; // 👈 mismo nombre que en backend
+  creationDate: string;
+  status: string;
 }
 
 export interface Lesson {

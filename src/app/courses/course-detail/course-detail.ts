@@ -66,7 +66,7 @@ export class CourseDetailComponent implements OnInit {
 
   markAsCompleted() {
     // Aquí puedes implementar la lógica para marcar la lección como completada
-    console.log('Lesson marked as completed:', this.lesson?.lesson_id);
+    console.log('Lesson marked as completed:', this.lesson?.id);
   }
 
   goToNextLesson() {
