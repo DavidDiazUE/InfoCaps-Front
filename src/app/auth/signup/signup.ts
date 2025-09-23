@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { CreateUserRequest } from '../../models/api-response.model';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-signup',
   standalone: true,
@@ -22,7 +22,7 @@ export class SignupComponent {
     private userService: UserService,
     private router: Router
   ) {
-    // Formulario simplificado - solo campos esenciales
+  
     this.signupForm = this.fb.group({
       firstName: ['', [
         Validators.required,
@@ -85,18 +85,26 @@ export class SignupComponent {
       
       this.userService.createUser(userData).subscribe({
         next: (user) => {
-          console.log('✅ Signup successful:', user);
+          console.log(' Signup successful:', user);
           this.loading = false;
           if (user && user.user_id) {
-            alert('¡Registro exitoso! Ahora puedes iniciar sesión.');
-            this.router.navigate(['/login']);
-          } else {
-            console.log('❌ Signup failed - no user_id in response');
+            Swal.fire({
+            title: '¡Registro exitoso! 🎉',
+            text: 'Ahora puedes iniciar sesión.',
+            icon: 'success',
+            confirmButtonText: 'Ir al login',
+              confirmButtonColor: '#4a90e2'
+            }).then(() => {
+          this.router.navigate(['/login']);
+          });
+          }
+ else {
+            console.log(' Signup failed - no user_id in response');
             this.errorMessage = 'Error al crear la cuenta';
           }
         },
         error: (error) => {
-          console.error('❌ Signup error:', error);
+          console.error(' Signup error:', error);
           this.loading = false;
           
           if (error.status === 0) {
@@ -111,7 +119,7 @@ export class SignupComponent {
         }
       });
     } else {
-      console.log('❌ Form is invalid');
+      console.log(' Form is invalid');
       this.logFormErrors();
       this.markFormGroupTouched();
     }

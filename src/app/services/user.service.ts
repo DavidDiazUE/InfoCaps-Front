@@ -51,7 +51,7 @@ export class UserService {
         password: response.password
       })),
       catchError(error => {
-        console.error('❌ Error creating user:', error);
+        console.error(' Error creating user:', error);
         throw error;
       })
     );
@@ -78,7 +78,7 @@ export class UserService {
         return false;
       }),
       catchError(error => {
-        console.error('❌ Login error:', error);
+        console.error(' Login error:', error);
         return of(false);
       })
     );

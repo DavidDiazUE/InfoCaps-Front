@@ -8,18 +8,14 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* ===========================================
-   MODO CONTRASTE - ESTILOS DE ACCESIBILIDAD
-   =========================================== */
 
-/* Selector universal para aplicar a TODOS los elementos */
 body.modo-contraste,
 body.modo-contraste * {
   background-color: #000 !important;
   color: #ffff00 !important;
 }
 
-/* Elementos específicos de la aplicación */
+
 body.modo-contraste .home,
 body.modo-contraste .container,
 body.modo-contraste .hero-section,
@@ -48,7 +44,7 @@ body.modo-contraste td {
   color: #ffff00 !important;
 }
 
-/* Elementos específicos de cursos */
+
 body.modo-contraste .course-container,
 body.modo-contraste .course-header,
 body.modo-contraste .course-content,
@@ -64,7 +60,7 @@ body.modo-contraste .login-required-section {
   color: #ffff00 !important;
 }
 
-/* Penetrar en componentes Angular encapsulados */
+
 ::ng-deep body.modo-contraste .course-container,
 ::ng-deep body.modo-contraste .course-header,
 ::ng-deep body.modo-contraste .course-content,
@@ -77,7 +73,7 @@ body.modo-contraste .login-required-section {
   color: #ffff00 !important;
 }
 
-/* TEXTOS */
+
 body.modo-contraste h1,
 body.modo-contraste h2,
 body.modo-contraste h3,
@@ -95,7 +91,7 @@ body.modo-contraste th {
   background-color: transparent !important;
 }
 
-/* ENLACES */
+
 body.modo-contraste a {
   color: #ffff00 !important;
   text-decoration: underline !important;
@@ -108,7 +104,7 @@ body.modo-contraste a:focus {
   outline-offset: 2px !important;
 }
 
-/* FORMULARIOS */
+
 body.modo-contraste input,
 body.modo-contraste select,
 body.modo-contraste textarea {
@@ -126,7 +122,7 @@ body.modo-contraste textarea:focus {
   box-shadow: 0 0 5px 2px #ffff00 !important;
 }
 
-/* BOTONES */
+
 body.modo-contraste button {
   background-color: #333 !important;
   color: #ffff00 !important;
@@ -140,7 +136,7 @@ body.modo-contraste button:focus {
   border-color: #ffea00 !important;
 }
 
-/* TABLAS */
+
 body.modo-contraste table,
 body.modo-contraste th,
 body.modo-contraste td {
@@ -149,18 +145,16 @@ body.modo-contraste td {
   color: #ffff00 !important;
 }
 
-/* CURSOR VISIBLE EN FOCO */
+
 body.modo-contraste *:focus {
   outline: 3px solid #ffff00 !important;
   outline-offset: 2px !important;
 }
 
-/* INVERTIR IMÁGENES EN MODO CONTRASTE */
-body.modo-contraste img {
-  filter: brightness(0) invert(1) !important;
-}
 
-/* Estilos adicionales para componentes Angular */
+
+
+
 ::ng-deep .modo-contraste .header,
 ::ng-deep .modo-contraste .footer,
 ::ng-deep .modo-contraste .navigation,
@@ -170,7 +164,6 @@ body.modo-contraste img {
   color: #ffff00 !important;
 }
 
-/* Colores de categorías globales con !important */
 .category-contabilidad,
 [class*="category-contabilidad"] {
   background-color: #e74c3c !important;
@@ -191,7 +184,7 @@ body.modo-contraste img {
   background-color: #f39c12 !important;
 }
 
-/* Override de colores de categorías en modo contraste */
+
 body.modo-contraste .category-contabilidad,
 body.modo-contraste [class*="category-contabilidad"],
 body.modo-contraste .category-finanzas,

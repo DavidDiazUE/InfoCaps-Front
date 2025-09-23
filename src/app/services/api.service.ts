@@ -7,7 +7,7 @@ import { catchError, tap, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ApiService {
-  private baseUrl = 'http://localhost:8080';  // ✅ corregido
+   private baseUrl = 'http://localhost:8080';  
 
   constructor(private http: HttpClient) {}
 
@@ -35,9 +35,9 @@ export class ApiService {
       headers: this.getHeaders(),
       params: httpParams
     }).pipe(
-      tap(response => console.log(`✅ GET ${url} Success:`, response)),
+      tap(response => console.log(` GET ${url} Success:`, response)),
       catchError(error => {
-        console.error(`❌ GET ${url} Error:`, error);
+        console.error(` GET ${url} Error:`, error);
         return throwError(() => error);
       })
     );
@@ -50,10 +50,10 @@ export class ApiService {
       headers: this.getHeaders()
     }).pipe(
       tap(response => {
-        console.log(`✅ POST ${endpoint} Success:`, response);
+        console.log(` POST ${endpoint} Success:`, response);
       }),
       catchError(error => {
-        console.error(`❌ POST ${endpoint} Error:`, error);
+        console.error(` POST ${endpoint} Error:`, error);
         console.error('Error details:', {
           status: error.status,
           statusText: error.statusText,
@@ -67,16 +67,16 @@ export class ApiService {
   }
 
   put<T>(endpoint: string, data: any): Observable<T> {
-    console.log(`🔄 PUT Request: ${this.baseUrl}/${endpoint}`, data);
+    console.log(` PUT Request: ${this.baseUrl}/${endpoint}`, data);
     
     return this.http.put<T>(`${this.baseUrl}/${endpoint}`, data, {
       headers: this.getHeaders()
     }).pipe(
       tap(response => {
-        console.log(`✅ PUT ${endpoint} Success:`, response);
+        console.log(` PUT ${endpoint} Success:`, response);
       }),
       catchError(error => {
-        console.error(`❌ PUT ${endpoint} Error:`, error);
+        console.error(` PUT ${endpoint} Error:`, error);
         return throwError(() => error);
       })
     );
@@ -92,17 +92,17 @@ export class ApiService {
       });
     }
 
-    console.log(`🔄 DELETE Request: ${this.baseUrl}/${endpoint}`, params);
+    console.log(` DELETE Request: ${this.baseUrl}/${endpoint}`, params);
 
     return this.http.delete<T>(`${this.baseUrl}/${endpoint}`, {
       headers: this.getHeaders(),
       params: httpParams
     }).pipe(
       tap(response => {
-        console.log(`✅ DELETE ${endpoint} Success:`, response);
+        console.log(` DELETE ${endpoint} Success:`, response);
       }),
       catchError(error => {
-        console.error(`❌ DELETE ${endpoint} Error:`, error);
+        console.error(` DELETE ${endpoint} Error:`, error);
         return throwError(() => error);
       })
     );

@@ -9,6 +9,7 @@ import { EntrepreneurshipCourseComponent } from './courses/entrepreneurship-cour
 
 import { CourseDetailComponent } from './courses/course-detail/course-detail';
 import { AuthGuard } from './core/guards/auth.guard';
+import { suscriptionComponent } from './suscription/suscription';
 
 
 export const routes: Routes = [
@@ -19,6 +20,7 @@ export const routes: Routes = [
   { path: 'finanzas', component: FinanceCourseComponent },
   { path: 'marketing', component: MarketingCourseComponent },
   { path: 'emprendimiento', component: EntrepreneurshipCourseComponent },
+  { path: 'suscripcion', component: suscriptionComponent },
   {
     path: 'lesson/:category/:id',
     component: CourseDetailComponent,

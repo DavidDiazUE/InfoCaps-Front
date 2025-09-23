@@ -1,0 +1,197 @@
+.subscription-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: #fff; /* Fondo blanco */
+}
+
+.subscription-card {
+  background: #b8d4f0; /* Azul claro */
+  padding: 50px 40px;
+  border-radius: 30px;
+  width: 100%;
+  max-width: 500px;
+
+  /*  Centrar todo el contenido */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.subscription-header {
+  margin-bottom: 30px;
+}
+
+.subscription-header .logo img {
+  width: 40%; 
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.subscription-header h2 {
+  font-size: 1.4rem;
+  color: #2c3e50;
+  margin: 0;
+}
+
+
+form {
+  width: 100%;
+  max-width: 400px;
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #2c3e50;
+  font-size: 15px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 25px;
+  font-size: 15px;
+  background: rgba(255, 255, 255, 0.85);
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  background: white;
+  box-shadow: 0 0 8px rgba(74, 144, 226, 0.3);
+}
+
+.form-group input::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.field-error {
+  color: #dc3545;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+
+.btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 25px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+}
+
+.btn-primary {
+  background: #4a90e2;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #357abd;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Error del servidor */
+.server-error-message {
+  color: #dc3545;
+  text-align: center;
+  margin: 15px 0;
+  padding: 12px;
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+/* 📱 Responsivo */
+
+/* 🔹 Tablets grandes / pantallas medianas (<=1080px) */
+@media (max-width: 1080px) {
+  .subscription-card {
+    max-width: 450px;
+    padding: 40px 30px;
+  }
+
+  .subscription-header .logo img {
+    width: 35%;
+  }
+
+  .subscription-header h2 {
+    font-size: 1.3rem;
+  }
+}
+
+/* 🔹 Tablets pequeñas (<=768px) */
+@media (max-width: 768px) {
+  .subscription-card {
+    max-width: 400px;
+    padding: 35px 25px;
+  }
+
+  .subscription-header .logo img {
+    width: 30%;
+  }
+
+  .subscription-header h2 {
+    font-size: 1.2rem;
+  }
+
+  .form-group input {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+
+/* 🔹 Móviles (<=480px) */
+@media (max-width: 480px) {
+  .subscription-card {
+    padding: 30px 20px;
+  }
+
+  .subscription-header .logo img {
+    width: 60px; /* Logo más pequeño */
+  }
+
+  .subscription-header h2 {
+    font-size: 1.1rem;
+  }
+
+  form {
+    max-width: 100%; /* ocupa todo el ancho */
+  }
+
+  .form-row {
+    grid-template-columns: 1fr; /* Campos en columna */
+    gap: 0;
+  }
+}

@@ -15,15 +15,15 @@
     <div class="course-stats" *ngIf="isLoggedIn && !loading">
       <div class="stat-item">
         <div class="stat-number">{{ courseInfo.totalLessons }}</div>
-        <div class="stat-label">Lecciones</div>
+        <div class="stat-label"><br>Lecciones</div>
       </div>
       <div class="stat-item">
         <div class="stat-number">{{ courseInfo.estimatedDuration }}</div>
-        <div class="stat-label">Minutos</div>
+        <div class="stat-label"><br>Minutos</div>
       </div>
       <div class="stat-item">
         <div class="stat-number">{{ courseInfo.level }}</div>
-        <div class="stat-label">Nivel</div>
+        <div class="stat-label"><br>Nivel</div>
       </div>
     </div>
 
@@ -33,7 +33,7 @@
         <h2>¿Qué aprenderás?</h2>
         <div class="topics-grid">
           <div class="topic-item" *ngFor="let topic of courseInfo.topics">
-            <span class="topic-icon">✓</span>
+            <span class="topic-icon">*</span>
             <span class="topic-text">{{ topic }}</span>
           </div>
         </div>

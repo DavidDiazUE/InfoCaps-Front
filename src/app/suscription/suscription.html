@@ -1,0 +1,88 @@
+<div class="subscription-container">
+  <div class="subscription-card">
+    <div class="subscription-header">
+      <div class="logo"><img src="images/logo-infocaps.png" alt=""></div>
+      <h2>Suscripción / Donación</h2>
+    </div>
+
+    <form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()">
+
+     
+      <div class="form-group">
+        <label for="amount">Cantidad (COP)</label>
+        <input
+          type="number"
+          id="amount"
+          formControlName="amount"
+          placeholder="Ingrese la cantidad a donar"
+          [class.error]="subscriptionForm.get('amount')?.invalid && subscriptionForm.get('amount')?.touched"
+        >
+        <div class="field-error" *ngIf="getFieldError('amount')">
+          {{ getFieldError('amount') }}
+        </div>
+      </div>
+
+    
+      <div class="form-group">
+        <label for="cardNumber">Número de tarjeta</label>
+        <input
+          type="text"
+          id="cardNumber"
+          formControlName="cardNumber"
+          placeholder="Ingrese el número de su tarjeta"
+          maxlength="16"
+          [class.error]="subscriptionForm.get('cardNumber')?.invalid && subscriptionForm.get('cardNumber')?.touched"
+        >
+        <div class="field-error" *ngIf="getFieldError('cardNumber')">
+          {{ getFieldError('cardNumber') }}
+        </div>
+      </div>
+
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cvv">CVV</label>
+          <input
+            type="text"
+            id="cvv"
+            formControlName="cvv"
+            placeholder="CVV"
+            maxlength="4"
+            [class.error]="subscriptionForm.get('cvv')?.invalid && subscriptionForm.get('cvv')?.touched"
+          >
+          <div class="field-error" *ngIf="getFieldError('cvv')">
+            {{ getFieldError('cvv') }}
+          </div>
+        </div>
+      </div>
+
+   
+      <div class="form-row">
+        <div class="form-group">
+          <label for="expiryDate">Fecha de expiración (MM/AA)</label>
+          <input
+            type="text"
+            id="expiryDate"
+            formControlName="expiryDate"
+            placeholder="MM/AA"
+            maxlength="5"
+            (input)="formatExpiryDate($event)"
+            [class.error]="subscriptionForm.get('expiryDate')?.invalid && subscriptionForm.get('expiryDate')?.touched"
+          >
+          <div class="field-error" *ngIf="getFieldError('expiryDate')">
+            {{ getFieldError('expiryDate') }}
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="loading">
+        <span *ngIf="loading">Procesando...</span>
+        <span *ngIf="!loading"><b>Donar</b></span>
+      </button>
+    </form>
+
+    <div class="server-error-message" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+  </div>
+</div>

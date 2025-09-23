@@ -24,10 +24,10 @@ export class LessonService {
 
   // Obtener todas las lecciones
   getAllLessons(): Observable<Lesson[]> {
-    console.log('📚 Getting all lessons from backend');
+    console.log(' Getting all lessons from backend');
     return this.apiService.get<BackendLessonResponse[]>('leccion-all').pipe(
       map((responses: BackendLessonResponse[]) => {
-        console.log('📚 Raw lessons from backend:', responses);
+        console.log(' Raw lessons from backend:', responses);
         const lessons = responses.map(this.mapBackendLessonToLesson);
         console.log(
           '🔎 Lessons after mapping:',
@@ -36,7 +36,7 @@ export class LessonService {
         return lessons;
       }),
       catchError((error) => {
-        console.error('❌ Error getting all lessons:', error);
+        console.error(' Error getting all lessons:', error);
         return of([]);
       })
     );
@@ -48,7 +48,7 @@ export class LessonService {
     return this.apiService.get<BackendLessonResponse>('leccion', { id }).pipe(
       map(this.mapBackendLessonToLesson),
       catchError((error) => {
-        console.error('❌ Error getting lesson by ID:', error);
+        console.error(' Error getting lesson by ID:', error);
         throw error;
       })
     );
@@ -59,10 +59,10 @@ getLessonsByCourse(courseId: number): Observable<Lesson[]> {
     map((lessons) => {
       console.log('✅ Lessons before filter:', lessons);
 
-      // ⚠️ Primero probamos sin filtro para confirmar que se muestran
+      //  Primero probamos sin filtro para confirmar que se muestran
       return lessons;
 
-      // 👉 Luego, si quieres aplicar filtro correcto:
+      //  Luego, si quieres aplicar filtro correcto:
       /*
       return lessons
         .filter(
@@ -78,7 +78,7 @@ getLessonsByCourse(courseId: number): Observable<Lesson[]> {
 
   // Obtener lecciones por categoría (filtra en frontend)
   getLessonsByCategory(category: string): Observable<Lesson[]> {
-    console.log('📚 Getting lessons for category:', category);
+    console.log(' Getting lessons for category:', category);
     return this.getAllLessons().pipe(
       map((lessons) => {
         const filteredLessons = lessons.filter(
@@ -105,7 +105,7 @@ getLessonsByCourse(courseId: number): Observable<Lesson[]> {
       .pipe(map(this.mapBackendLessonToLesson));
   }
 
-  // ⚠️ Eliminar lección
+  //  Eliminar lección
   deleteLesson(id: number): Observable<string> {
     console.warn('⚠️ deleteLesson no tiene endpoint en el backend');
     return of('No implementado en backend');

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../auth.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -43,8 +43,16 @@ export class LoginComponent {
         next: (success) => {
           this.loading = false;
           if (success) {
-            this.router.navigate(['/contabilidad']);
-          } else {
+          Swal.fire({
+                      title: '¡Login exitoso! 🎉',
+                      text: 'Ahora puedes ver las lecciones.',
+                      icon: 'success',
+                      confirmButtonText: 'Ir al la lección',
+                        confirmButtonColor: '#4a90e2'
+                      }).then(() => {
+                    this.router.navigate(['/contabilidad']);
+                    });
+                    } else {
             this.errorMessage = 'Credenciales inválidas';
           }
         },

@@ -20,7 +20,7 @@ export class CourseListComponent implements OnInit {
   lessons: Lesson[] = [];
   loading = false;
   isLoggedIn = false;
-  courseId: number = 0;  // 👈 Nuevo: almacenamos el ID del curso
+  courseId: number = 0;  
   
   courseInfo = {
     title: '',
@@ -39,7 +39,7 @@ export class CourseListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('🎯 CourseListComponent initialized');
+    console.log(' CourseListComponent initialized');
     
     // Obtener categoría de la URL si no se pasó como Input
     if (!this.category) {
@@ -58,7 +58,7 @@ export class CourseListComponent implements OnInit {
   }
 
   setCategoryData() {
-    console.log('⚙️ Setting category data for:', this.category);
+    console.log(' Setting category data for:', this.category);
     
     switch(this.category) {
       case 'contabilidad':
@@ -139,7 +139,7 @@ export class CourseListComponent implements OnInit {
         break;
     }
     
-    console.log('✅ Category data set:', this.courseInfo);
+    console.log(' Category data set:', this.courseInfo);
   }
 
   checkAuthStatus() {
@@ -150,10 +150,10 @@ export class CourseListComponent implements OnInit {
       this.isLoggedIn = loggedIn;
       
       if (loggedIn) {
-        console.log('✅ User is logged in, loading lessons');
+        console.log(' User is logged in, loading lessons');
         this.loadLessonsFromBackend();
       } else {
-        console.log('❌ User not logged in, clearing lessons');
+        console.log(' User not logged in, clearing lessons');
         this.lessons = [];
         this.loading = false;
       }
@@ -161,21 +161,21 @@ export class CourseListComponent implements OnInit {
   }
 
   viewLesson(lesson: Lesson) {
-    console.log('👁️ Viewing lesson:', lesson);
+    console.log(' Viewing lesson:', lesson);
     
     if (!this.isLoggedIn) {
-      console.log('❌ User not logged in, redirecting to login');
+      console.log(' User not logged in, redirecting to login');
       this.router.navigate(['/login']);
       return;
     }
     
-    console.log('✅ Navigating to lesson:', lesson.id);
+    console.log(' Navigating to lesson:', lesson.id);
     this.router.navigate(['/lesson', this.courseId, lesson.id]);
   }
 
   private loadLessonsFromBackend() {
     if (!this.isLoggedIn) {
-      console.log('❌ Cannot load lessons - user not logged in');
+      console.log(' Cannot load lessons - user not logged in');
       this.loading = false;
       return;
     }
@@ -185,7 +185,7 @@ export class CourseListComponent implements OnInit {
     
     this.lessonService.getLessonsByCourse(this.courseId).subscribe({
       next: (lessons) => {
-        console.log('✅ Lessons loaded successfully:', lessons);
+        console.log(' Lessons loaded successfully:', lessons);
         this.lessons = lessons;
         this.courseInfo.totalLessons = lessons.length;
         this.courseInfo.estimatedDuration = lessons.reduce((total, lesson) => 
@@ -199,7 +199,7 @@ export class CourseListComponent implements OnInit {
         });
       },
       error: (error) => {
-        console.error('❌ Error loading lessons:', error);
+        console.error(' Error loading lessons:', error);
         this.lessons = [];
         this.courseInfo.totalLessons = 0;
         this.courseInfo.estimatedDuration = 0;
